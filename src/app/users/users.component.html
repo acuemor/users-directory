@@ -1,0 +1,34 @@
+<div class="nice-input-wrapper">
+  <input class="nice-input" type="text" placeholder="Search by name" [(ngModel)]="searchText">
+  <span class="focus-border"><i></i></span>
+</div>
+
+<h2>User data</h2>
+<div class="rTable">
+  <div class="rTableRow">
+    <div class="rTableHead"><strong>Name</strong></div>
+    <div class="rTableHead"><span style="font-weight: bold;">Address</span></div>
+    <div class="rTableHead">Email</div>
+  </div>
+  <!-- <div class="rTableRow" *ngFor="let user of users; index as i;"> -->
+  <div class="rTableRow" *ngFor="let user of users | filterUser: {name: searchText}; let i=index;" (click)="getUserDetail(user)">
+    <div class="rTableCell">{{user.name}}</div>
+    <div class="rTableCell">{{user.address.street}} - {{user.address.suite}}, {{user.address.city}}</div>
+    <div class="rTableCell">{{user.email}}</div>
+  </div>
+</div>
+
+<div *ngIf="displayDetail">
+    <h2>User detail</h2>
+    <h3>Album</h3>
+    <ul *ngFor="let album of albums ; let i=index;">
+      <li>{{album.id}}</li>
+      <li>{{album.title}}</li>
+    </ul>
+
+    <h3>Posts</h3>
+    <ul *ngFor="let post of posts ; let i=index;">
+      <li>{{post.id}}</li>
+      <li>{{post.title}}</li>
+    </ul>
+</div>
